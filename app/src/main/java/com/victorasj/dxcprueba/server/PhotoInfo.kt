@@ -5,7 +5,7 @@ class PhotoInfo (
     val secret : String,
     val server : String,
     val farm : Int,
-    val photoOwner : PhotoOwner,
-    val photoTitle: PhotoTitle,
-    val photoDescription: PhotoDescription
+    val photoOwner : Owner,
+    val photoTitle: Title,
+    val photoDescription: Description
 )

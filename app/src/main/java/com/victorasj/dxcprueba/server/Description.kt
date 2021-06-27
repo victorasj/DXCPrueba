@@ -2,7 +2,7 @@ package com.victorasj.dxcprueba.server
 
 import com.google.gson.annotations.SerializedName
 
-class PhotoDescription (
+class Description (
     @SerializedName("_content")
     val description : String
 )
