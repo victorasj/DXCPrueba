@@ -1,2 +1,3 @@
 rootProject.name = "DXCPrueba"
 include ':app'
+include ':data'
