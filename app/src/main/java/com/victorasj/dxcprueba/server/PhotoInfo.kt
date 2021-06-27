@@ -2,7 +2,7 @@ package com.victorasj.dxcprueba.server
 
 import com.google.gson.annotations.SerializedName
 
-class PhotoInfo (
+data class PhotoInfo (
     val id : String,
     val secret : String,
     val server : String,
@@ -10,7 +10,10 @@ class PhotoInfo (
     @SerializedName("owner")
     val photoOwner : Owner,
     @SerializedName("title")
-    val photoTitle: Title,
+    val photoTitle: PhotoTitle,
     @SerializedName("description")
-    val photoDescription: Description
-)
+    val photoDescription: Description,
+    @SerializedName("dates")
+    val photoDate: PhotoDate,
+
+    )
