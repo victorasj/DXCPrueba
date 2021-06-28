@@ -32,7 +32,7 @@ private val dataModule = module {
 
 private val scopesModule = module {
     scope(named<MainFragment>()){
-        viewModel { (id : String) -> MainViewModel(get(), id) }
+        viewModel { MainViewModel(get()) }
         scoped { GetPhotos(get())  }
     }
 }
