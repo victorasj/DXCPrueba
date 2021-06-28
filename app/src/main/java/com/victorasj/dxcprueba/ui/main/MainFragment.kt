@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.victorasj.dxcprueba.EventObserver
 import com.victorasj.dxcprueba.R
 import com.victorasj.dxcprueba.databinding.MainFragmentBinding
 import org.koin.androidx.scope.ScopeFragment
@@ -15,7 +18,7 @@ class MainFragment : ScopeFragment() {
     private lateinit var binding : MainFragmentBinding
 
     private lateinit var adapter: PhotoAdapter
-
+    private lateinit var navController: NavController
 
     private val viewModel: MainViewModel by viewModel()
 
@@ -34,11 +37,15 @@ class MainFragment : ScopeFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = view.findNavController()
 
         adapter = PhotoAdapter (viewModel::onPhotoClick)
         binding.recyclerViewPhotos.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewPhotos.adapter = adapter
         viewModel.photos.observe(viewLifecycleOwner, Observer (::updateUi))
+        viewModel.navigateToPhoto.observe(viewLifecycleOwner, EventObserver {
+            navController.navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(it.id))
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
