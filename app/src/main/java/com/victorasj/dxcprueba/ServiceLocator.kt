@@ -3,7 +3,7 @@ package com.victorasj.dxcprueba
 import android.app.Application
 import com.victorasj.data.repository.PhotosRepository
 import com.victorasj.data.source.RemoteDataSource
-import com.victorasj.dxcprueba.server.PhotosDataSource
+import com.victorasj.dxcprueba.server.FlickrDataSource
 import com.victorasj.dxcprueba.ui.main.MainFragment
 import com.victorasj.dxcprueba.ui.main.MainViewModel
 import com.victorasj.interactor.GetPhotos
@@ -23,7 +23,7 @@ fun Application.initServiceLocator(){
 }
 
 private val appModule = module {
-    factory<RemoteDataSource> { PhotosDataSource() }
+    factory<RemoteDataSource> { FlickrDataSource() }
 }
 
 private val dataModule = module {
