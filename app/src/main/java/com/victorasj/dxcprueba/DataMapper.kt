@@ -12,5 +12,5 @@ fun PhotoInfo.toPhoto() : Photo =
         photoTitle.title,
         photoDate.taken,
         photoDescription.description,
-        secret
+        "https://live.staticflickr.com/$server/${id}_${secret}_s.jpg"
     )

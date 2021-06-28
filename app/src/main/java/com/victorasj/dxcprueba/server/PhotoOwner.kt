@@ -1,6 +1,6 @@
 package com.victorasj.dxcprueba.server
 
-data class Owner (
+data class PhotoOwner (
     val nsid : String,
     val username : String,
     val realname : String,
