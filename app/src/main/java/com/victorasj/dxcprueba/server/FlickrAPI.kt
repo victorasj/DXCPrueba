@@ -7,7 +7,7 @@ import retrofit2.http.Url
 interface FlickrAPI {
 
     @GET
-    suspend fun getPhotos(@Url url : String, @Query("api_key") api_key : String, @Query("tags") tag : String, @Query("format") format : String = "json", @Query("nojsoncallback") callback : String = "1") : List<PhotoList>
+    suspend fun getPhotos(@Url url : String, @Query("api_key") api_key : String, @Query("tags") tag : String, @Query("format") format : String = "json", @Query("nojsoncallback") callback : String = "1") : PhotoWrapper
 
     @GET
     suspend fun getPhoto(@Url url: String, @Query("api_key") api_key : String, @Query("photo_id") id : String, @Query("format") format : String = "json", @Query("nojsoncallback") callback : String = "1") : PhotoInfo
