@@ -47,12 +47,12 @@ class MainFragment : ScopeFragment() {
         val searchViewName = searchMenu.actionView as SearchView
         searchViewName.queryHint =  getString(R.string.photo_search)
         searchViewName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+            override fun onQueryTextSubmit(value: String?): Boolean {
+                viewModel.search(value)
+                return true
             }
 
             override fun onQueryTextChange(value: String?): Boolean {
-                viewModel.search(value)
                 return true
             }
         })
