@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val getPhotos : GetPhotos) : ScopedViewModel() {
 
     sealed class UiModel {
+        object Loading : UiModel()
         class Content(val photos : List<Photo>) : UiModel()
     }
 
@@ -27,6 +28,7 @@ class MainViewModel(private val getPhotos : GetPhotos) : ScopedViewModel() {
 
     private fun refresh(tag : String?) {
         launch {
+            _photos.value = UiModel.Loading
             _photos.value = UiModel.Content(if(!tag.isNullOrEmpty()) getPhotos.invoke(tag) else listOf())
         }
     }
