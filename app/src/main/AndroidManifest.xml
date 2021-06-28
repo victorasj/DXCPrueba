@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:name=".FlickrApp"
         android:theme="@style/Theme.DXCPrueba">
-        <activity android:name=".MainActivity">
+        <activity android:name=".NavHostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

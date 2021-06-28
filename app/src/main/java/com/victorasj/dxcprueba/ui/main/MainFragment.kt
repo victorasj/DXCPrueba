@@ -1,32 +1,69 @@
 package com.victorasj.dxcprueba.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorasj.dxcprueba.R
+import com.victorasj.dxcprueba.databinding.MainFragmentBinding
+import org.koin.androidx.scope.ScopeFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment() {
+class MainFragment : ScopeFragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
+    private lateinit var binding : MainFragmentBinding
+
+    private lateinit var adapter: PhotoAdapter
+
+
+    private val viewModel: MainViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        binding = MainFragmentBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        adapter = PhotoAdapter (viewModel::onPhotoClick)
+        binding.recyclerViewPhotos.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewPhotos.adapter = adapter
+        viewModel.photos.observe(viewLifecycleOwner, Observer (::updateUi))
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        val searchMenu = menu.findItem(R.id.photo_search)
+        val searchViewName = searchMenu.actionView as SearchView
+        searchViewName.queryHint =  getString(R.string.photo_search)
+        searchViewName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(value: String?): Boolean {
+                viewModel.search(value)
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun updateUi(model : MainViewModel.UiModel) {
+        when(model) {
+            is MainViewModel.UiModel.Content -> adapter.photos = model.photos
+        }
+    }
+
 
 }
