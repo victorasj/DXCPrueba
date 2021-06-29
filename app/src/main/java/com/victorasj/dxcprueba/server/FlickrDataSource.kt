@@ -14,7 +14,7 @@ class FlickrDataSource : RemoteDataSource {
         val listPhotosList : List<PhotoList> = RetrofitInstance.SERVICE.getPhotos("?method=flickr.photos.search", "3dbd3988a9b7e3e5234741f122a3633b", value).wrapper.photos
         val listPhotos : MutableList<Photo> = mutableListOf()
         listPhotosList.forEach {
-            listPhotos.add(RetrofitInstance.SERVICE.getPhoto("?method=flickr.photos.getInfo", "3dbd3988a9b7e3e5234741f122a3633b", it.id).photo.toPhoto())
+            listPhotos.add(getPhoto(it.id))
         }
         listPhotos
     }
