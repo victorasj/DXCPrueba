@@ -16,7 +16,7 @@ data class PhotoInfo (
     @SerializedName("title")
     val photoTitle: PhotoTitle,
     @SerializedName("description")
-    val photoDescription: Description,
+    val photoDescription: PhotoDescription,
     @SerializedName("dates")
     val photoDate: PhotoDate
     )
