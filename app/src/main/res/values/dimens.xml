@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_borders">16dp</dimen>
+    <dimen name="margin_top_border">8dp</dimen>
+
+    <dimen name="small_image">75dp</dimen>
+    <dimen name="medium_image">125dp</dimen>
+
+</resources>
